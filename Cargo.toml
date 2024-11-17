@@ -1,0 +1,21 @@
+[package]
+name = "rust-font-kit-demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# https://crates.io/crates/ttf-parser
+ttf-parser = "0.25.0"
+# https://crates.io/crates/owned_ttf_parser
+owned_ttf_parser = "0.25.0"
+#--
+# https://crates.io/crates/font
+font = "0.39.1"
+# https://crates.io/crates/fontkit
+fontkit = "0.5.2"
+#--
+# https://crates.io/crates/font-kit
+font-kit = "0.14.2"
+# https://crates.io/crates/pathfinder_geometry
+pathfinder_geometry = "0.5.1"
+
