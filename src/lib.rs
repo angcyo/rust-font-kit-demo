@@ -62,7 +62,7 @@ mod tests {
         let path = outline.to_svg_path();
         println!("path:{}", path);*/
 
-        for text in "中国人?".chars() {
+        for text in "中国人?.".chars() {
             let path = ttf_glyph_to_svg(&face, &text.to_string());
             println!("{}->{}", text, path);
 
