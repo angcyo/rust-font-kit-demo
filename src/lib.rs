@@ -49,7 +49,8 @@ mod tests {
     #[test]
     fn test_ttf_parser() {
         //let path = "tests/JetBrainsMono-Bold.ttf".to_string(); //不支持中文
-        let path = "tests/微软雅黑-Bold.ttc".to_string();
+        //let path = "tests/微软雅黑-Bold.ttc".to_string();
+        let path = "tests/SourceHanSansCN-Normal.otf".to_string();
         let bytes = read_file_bytes(&path);
         let face = owned_ttf_parser::Face::parse(&bytes, 0).unwrap();
         println!("face glyphs number:{:?}", face.number_of_glyphs());
@@ -159,23 +160,23 @@ mod tests {
     /// y轴方向是向下的，需要转换为向上
     impl owned_ttf_parser::OutlineBuilder for SvgOutline {
         fn move_to(&mut self, x: f32, y: f32) {
-            self.paths.push(format!("M {} {}", x, -y));
-            // self.paths.push(format!("M {} {}", x, y));
+            self.paths.push(format!("M{} {}", x, -y));
+            // self.paths.push(format!("M{} {}", x, y));
         }
 
         fn line_to(&mut self, x: f32, y: f32) {
-            self.paths.push(format!("L {} {}", x, -y));
-            // self.paths.push(format!("L {} {}", x, y));
+            self.paths.push(format!("L{} {}", x, -y));
+            // self.paths.push(format!("L{} {}", x, y));
         }
 
         fn quad_to(&mut self, x1: f32, y1: f32, x: f32, y: f32) {
-            self.paths.push(format!("Q {} {} {} {}", x1, -y1, x, -y));
-            // self.paths.push(format!("Q {} {} {} {}", x1, y1, x, y));
+            self.paths.push(format!("Q{} {} {} {}", x1, -y1, x, -y));
+            // self.paths.push(format!("Q{} {} {} {}", x1, y1, x, y));
         }
 
         fn curve_to(&mut self, x1: f32, y1: f32, x2: f32, y2: f32, x: f32, y: f32) {
-            self.paths.push(format!("C {} {} {} {} {} {}", x1, -y1, x2, -y2, x, -y));
-            // self.paths.push(format!("C {} {} {} {} {} {}", x1, y1, x2, -y2, x, y));
+            self.paths.push(format!("C{} {} {} {} {} {}", x1, -y1, x2, -y2, x, -y));
+            // self.paths.push(format!("C{} {} {} {} {} {}", x1, y1, x2, -y2, x, y));
         }
 
         fn close(&mut self) {
@@ -185,19 +186,19 @@ mod tests {
 
     impl font_kit::outline::OutlineSink for SvgOutline {
         fn move_to(&mut self, to: pathfinder_geometry::vector::Vector2F) {
-            self.paths.push(format!("M {} {}", to.x(), -to.y()));
+            self.paths.push(format!("M{} {}", to.x(), -to.y()));
         }
 
         fn line_to(&mut self, to: pathfinder_geometry::vector::Vector2F) {
-            self.paths.push(format!("L {} {}", to.x(), -to.y()));
+            self.paths.push(format!("L{} {}", to.x(), -to.y()));
         }
 
         fn quadratic_curve_to(&mut self, ctrl: pathfinder_geometry::vector::Vector2F, to: pathfinder_geometry::vector::Vector2F) {
-            self.paths.push(format!("Q {} {} {} {}", ctrl.x(), -ctrl.y(), to.x(), -to.y()));
+            self.paths.push(format!("Q{} {} {} {}", ctrl.x(), -ctrl.y(), to.x(), -to.y()));
         }
 
         fn cubic_curve_to(&mut self, ctrl: pathfinder_geometry::line_segment::LineSegment2F, to: pathfinder_geometry::vector::Vector2F) {
-            self.paths.push(format!("C {} {} {} {} {} {}", ctrl.from().x(), -ctrl.from().y(), ctrl.to().x(), -ctrl.to().y(), to.x(), -to.y()));
+            self.paths.push(format!("C{} {} {} {} {} {}", ctrl.from().x(), -ctrl.from().y(), ctrl.to().x(), -ctrl.to().y(), to.x(), -to.y()));
         }
 
         fn close(&mut self) {
